@@ -1,4 +1,324 @@
-function App(props)
+
+import {useForm} from 'react-hook-form'
+function App()
+{  
+  const {handleSubmit,register}=useForm()
+  const dis=(data)=>{
+    console.log(data)
+  }
+  return(
+
+    <form onSubmit={handleSubmit(dis)}>
+      <input type='text'placeholder='Enter rno' {...register("rno")}></input> 
+      <input type='text'placeholder='Enter name' {...register("name")}></input>
+      <input type='text'placeholder='Enter mark' {...register("mark")}></input> 
+      <input type='text'placeholder='Enter city' {...register("city")}></input> 
+      <input type="submit" value="clickme"></input>
+</form>
+  )
+}
+export default App
+/*import {useForm} from 'react-hook-form'
+function App()
+{  
+  const {handleSubmit,register,formState:{errors}}=useForm()
+  const dis=(data)=>{
+    console.log(data)
+  }
+  return(
+      <form onSubmit={handleSubmit(dis)}>
+      <input type="text" placeholder='Enter rno' {...register("rno",{required:true})}></input>
+      {errors.rno && errors.rno.type==="required" && <font color='red'>"must fill"</font>}<br></br>
+      <input type="text" placeholder='Enter name' {...register("sname",{minLength:5,required:true})}></input>
+      {errors.sname && errors.sname.type==="minLength" && "need atleast 5 chars"}
+      {errors.sname && errors.sname.type==="required" && <font color='red'>must fill username</font>}<br></br>
+      <input type="text" placeholder='Enter mark' {...register("mark",{min:0,max:100})}></input>
+       {errors.mark && errors.mark.type==="min" && "Mark only 0 to 100"}
+       {errors.mark && errors.mark.type==="max" &&  "Mark only 0 to 100"}
+       <br></br>
+      <input type="text" placeholder='Enter city' {...register("city",{pattern:(/[a-z]/g,/[0-9]/g,/[^0-9a-zA-Z]/g,/[A-Z]/g)})}></input> 
+    {errors.city && errors.city.type==="pattern" && "missing" }
+      <br></br>
+      <input type="submit" value="clickme"></input>
+</form>
+  )
+}
+export default App
+/*import {useEffect} from 'react'
+function App()
+{ 
+  useEffect(()=>{
+    setTimeout(()=>document.title="english",4000)
+  })
+  return(
+    <>
+    <h1>useEffect Hooks</h1>
+    {document.title}
+    </>
+  )
+}
+export default App
+/*import {useEffect} from 'react'
+function App()
+{
+  
+  useEffect(()=>{
+   document.title="priya "
+   
+  })
+  return(
+    <>
+    <h1>UseEffect Hooks</h1>
+    {document.title}
+    </>
+  )
+}
+export default App
+/*import {useState} from 'react'
+function App()
+{
+  const [name,setName]=useState("pri")
+  const dis=(e)=>{
+    setName("mouni")
+  }
+  return(
+    <>
+    <h1>React hooks Usestate</h1>
+    <h2>{name}</h2>
+    <button onClick={dis}>change</button>
+    </>
+  )
+}
+export default App
+/*import {useState} from 'react'
+function App()
+{ 
+  const [name,setName]=useState("pri")
+  const dis=(e)=>{
+    setName(e.target.value)
+    console.log(e.target.value)
+  }
+  return(
+    <> 
+    <h1>Welcome to React Hooks</h1>
+    <input type="text" value={name} onChange={(e)=>dis(e)} ></input>
+    </>
+  )
+}
+export default App
+/*import React from "react"
+import { useState } from "react"
+function App()
+{
+  const [gender,setGender]=useState("")
+  const dis=(e)=>{
+    
+    if (e.target.value==="male")
+    {
+      e.target.checked=true
+      setGender("male")
+    }
+    if(e.target.value==="female")
+      { 
+        e.target.checked=true
+      setGender("female")
+    }
+    if(e.target.value==="others")
+      { 
+        setGender("others")
+        e.target.checked=true
+    
+    }
+      
+  }
+  return(
+    <>
+    <input type="radio"  name="gen" onChange={(e)=>dis(e)} value="male"></input> 
+    <input type="radio"  name="gen" onChange={(e)=>dis(e)} value="female"></input>   
+    <input type="radio"  name="gen" onChange={(e)=>dis(e)}  value="others"></input>    
+    <br></br>
+    select gender:{gender}
+      </>
+  )
+} 
+export default App
+/*import { useState } from "react"
+function App()
+{    
+  const [rno,setRno]=useState(0)
+  const [sname,setSname]=useState("")
+  const [mark,setMark]=useState(0)
+  const dis=(e)=>{
+    if(e.target.id==="t1")
+      setRno(e.target.value)
+    if(e.target.id==="t2")
+      setSname(e.target.value)
+    if(e.target.id==="t3")
+      setMark(e.target.value)
+  }
+  return(
+    <>
+    <input type="text" id ="t1" onChange={(e)=>dis(e)} value={rno}></input><br></br>
+    <input type="text"  id="t2" onChange={(e)=>dis(e)} value={sname}></input><br></br>
+    <input type="text" id="t3"  onChange={(e)=>dis(e)} value={mark}></input>
+
+    </>
+  )
+}
+export default App
+
+/*import React from 'react'
+import { useState} from 'react' 
+
+const App=()=> { 
+  const [age,setAge]=useState(0)
+ // var v=100
+  
+  const show=(ev)=>{
+ //   v=v+1
+setAge(ev.target.value) 
+    console.log("----------",ev.target.value)
+  }
+  return (
+    <>
+    <h1>Value attribute issue in textbox</h1>
+    <input type="text" onChange={(e)=>show(e)} value={age}></input>
+  </>
+  )
+}
+
+export default App
+/*function App()
+{
+  const show=(event)=>{
+    event.preventDefault()
+    console.log("submit button pressed")
+  } 
+  var unc=0,pwc=0 
+  const dis=(event)=>{
+    if(event.target.name==="un")
+      unc+=1
+    if(event.target.name==="pw")
+      pwc+=1
+    document.getElementById("r1").innerHTML=unc
+    document.getElementById("r2").innerHTML=pwc
+  }
+  return(
+    <form onSubmit={show}>
+      <input type="text"  onChange={(e)=>dis(e)} name="un" placeholder="Enter username"></input>
+      <br></br>
+      <input type="password"  onChange={(e)=>dis(e)} name="pw" placeholder="Enter password"></input>
+      <br></br>
+      <input type="submit"></input>
+      <input type="button" value="clickme"></input>
+      <input type="reset"></input>  
+      <button><b>clickme</b></button>
+      <div id="r1"></div>
+      <div id="r2"></div>  
+      </form>
+  )
+}
+export default App
+/*function App()
+{ 
+  var c=0
+  const dis1=(event)=>{
+    event.target.style.backgroundColor="red";
+    event.target.value=parseInt(event.target.value)+1
+}
+  const dis2=(event)=>{
+  event.target.style.backgroundColor="green";
+}
+  return(
+    <>
+    <h2>On blur Event</h2>
+    <input type="text" value={c} onBlur={(e)=>dis1(e)} onFocus={(e)=>dis2(e)}></input>
+    <input type="text" value={c}onBlur={(e)=>dis1(e)} onFocus={(e)=>dis2(e)}></input>
+    <input type="text" value={c}  onBlur={(e)=>dis1(e)} onFocus={(e)=>dis2(e)}></input>
+    </>
+  )
+}
+export default App
+/*function App()
+{
+  const dis1=(event)=>{
+    document.getElementById("t1").style.backgroundColor="white"
+    document.getElementById("t2").style.backgroundColor="white"
+    document.getElementById("t3").style.backgroundColor="white"
+    if(event.target.id==="t1")
+      document.getElementById("t1").style.backgroundColor="lightgreen" 
+    if(event.target.id==="t2")
+      document.getElementById("t2").style.backgroundColor="lightgreen"
+    if(event.target.id==="t3")
+    document.getElementById("t3").style.backgroundColor="lightgreen"
+
+  }
+  return(
+    <> 
+    <h1>onFocus Event</h1>
+    <input type="text" onFocus={(e)=>dis1(e)} id="t1"></input>
+    <input type="text" onFocus={(e)=>dis1(e)} id="t2"></input>
+    <input type="text" onFocus={(e)=>dis1(e)} id="t3"></input></>
+
+  )
+}
+export default App
+/*function App()
+{
+  return(
+    <form>
+      <input type="text" placeholder="Enter User Name:" value="priya"></input>
+      <br></br>
+      <input type="number" placeholder="Enter No:" min="100"max="2000"></input>
+      <br></br>
+      <label>Enter password:
+      <input type="password" placeholder="Enter password:"></input>
+      </label>
+     <br></br>
+     <input type="radio" name="gen" checked></input>Male
+     <input type="radio" name="gen" checked></input>Female
+     <input type="radio" name="gen" checked></input>Others
+     <br></br>
+     select course:
+     <input type="checkbox"></input>C
+     <input type="checkbox"></input>C++
+      <input type="checkbox"></input>JAVA
+<br></br>
+     Enter Address:
+     <textarea cols="20" rows="7"></textarea>
+     <br></br>
+     <select>
+      <option>January</option>
+      <option>February</option>
+      <option>March</option>
+      <option>April</option>
+      <option>May</option>
+      <option>June</option>
+</select> 
+<br></br>
+Enter Email:<input type="email"></input>
+select DOB:
+<input type="date"></input>
+select time:
+<input type="time"></input>
+<br></br> 
+<input type="week"></input>
+<br></br>
+<input type="file"></input>
+<br></br>
+<input type="range" min="0" max="7"></input>
+<br></br>
+<input type="hidden" value="100" name="hid"></input>
+<input type="reset" name="clr"></input>
+<input type="submit"></input>
+<input type="button" value="clickme"></input>
+<input type="reset" value="clear"></input>
+
+</form>
+  )
+}
+export default App
+/*function App(props)
 {
   return(
     <>
