@@ -1,45 +1,4 @@
 import React from 'react'
-class App extends React.Component
-{  
-  constructor (props)
-  {
-    super()
-    this.state=props.stud
-  } 
-  componentDidMount()
-  {
-    setTimeout(()=>this.setState({rno:3,sname:'mouni',mark:100}),5000)
-}
-componentDidUpdate()
-{
-  document.getElementById("res").innerHTML="Update Success"
-} 
-shouldComponentUpdate()
-{
- return true 
-}
-getSnapshotBeforeUpdate(preProps,prevState)
-{
-  document.getElementById("res1").innerHTML="Prev Value:"+prevState.rno+" "+prevState.sname+" "+prevState.mark
-   return null
-}
-
-  render()
-  {
-    return(
-      <>
-      <h1>This is clas components -Life cycle 1.Mount</h1>
-      <h1>Rno:{this.state.rno}</h1>
-      <h1>Student Name:{this.state.sname}</h1>
-      <h1>Mark:{this.state.mark}</h1>
-      <div id="res"></div>
-       <div id="res1"></div>
-      </>
-    )
-  }
-} 
-export default App
-/*import React from 'react'
 class Child extends React.Component
 {
   componentWillUnmount()
